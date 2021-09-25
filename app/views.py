@@ -1,10 +1,15 @@
-# payload to be taken in from get or post request as required
-# function checks the query to determine if dangerous or not
+from app import app
+from flask import render_template,request
 
+@app.route("/")
+def index():
+    return "home"
+
+@app.route("/analyze",methods=['GET','POST'])
 def check_query():
     # as this is just a simple proof of concept, 
     # we are taking the input manually
-    payload = input("please enter a payload")
+    payload =request.args['query']
     # open the sample payloads to compare against the user's input
     log = open('XSS payload.txt')
     logfile = log.read().splitlines()
@@ -16,4 +21,7 @@ def check_query():
             # exit the loop
             break
     log.close()
-    return found
+    if found == True:
+        return """{"result":"XSS attack"}"""
+    else:
+        return """{"result":"XSS attack"}"""

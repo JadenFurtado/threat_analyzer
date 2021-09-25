@@ -1,5 +1,0 @@
-my file is working
-another
-
-try 
-<a id=x tabindex=1 onactivate=alert(1)></a>
